@@ -1,30 +1,81 @@
 package com.ontariotechu.sofe3980U;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class BinaryAPIController {
 
-	@GetMapping("/add")
-	public String addString(@RequestParam(name="operand1", required=false, defaultValue="") String operand1,
-                       @RequestParam(name="operand2", required=false, defaultValue="") String operand2) {
-		Binary number1=new Binary (operand1);
-		Binary number2=new Binary (operand2);
-        return  Binary.add(number1,number2).getValue();
-		// http://localhost:8080/add?operand1=111&operand2=1010
-	}
-	
-	@GetMapping("/add_json")
-	public BinaryAPIResult addJSON(@RequestParam(name="operand1", required=false, defaultValue="") String operand1,
-                       @RequestParam(name="operand2", required=false, defaultValue="") String operand2) {
-		Binary number1=new Binary (operand1);
-		Binary number2=new Binary (operand2);
-        return  new BinaryAPIResult(number1,"add",number2,Binary.add(number1,number2));
-		// http://localhost:8080/add?operand1=111&operand2=1010
-	}
-
+    @GetMapping("/add")
+    public String add(@RequestParam(name="op1", required=true) String op1,
+                     @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.add(b1, b2);
+        return r.getValue();
+    }
+    
+    @GetMapping("/or")
+    public String or(@RequestParam(name="op1", required=true) String op1,
+                    @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.or(b1, b2);
+        return r.getValue();
+    }
+    
+    @GetMapping("/and")
+    public String and(@RequestParam(name="op1", required=true) String op1,
+                     @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.and(b1, b2);
+        return r.getValue();
+    }
+    
+    @GetMapping("/mul")
+    public String mul(@RequestParam(name="op1", required=true) String op1,
+                     @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.multiply(b1, b2);
+        return r.getValue();
+    }
+    
+    @GetMapping("/addJ")
+    public BinResult addJ(@RequestParam(name="op1", required=true) String op1,
+                         @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.add(b1, b2);
+        return new BinResult(b1.getValue(), b2.getValue(), r.getValue(), '+');
+    }
+    
+    @GetMapping("/orJ")
+    public BinResult orJ(@RequestParam(name="op1", required=true) String op1,
+                        @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.or(b1, b2);
+        return new BinResult(b1.getValue(), b2.getValue(), r.getValue(), '|');
+    }
+    
+    @GetMapping("/andJ")
+    public BinResult andJ(@RequestParam(name="op1", required=true) String op1,
+                         @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.and(b1, b2);
+        return new BinResult(b1.getValue(), b2.getValue(), r.getValue(), '&');
+    }
+    
+    @GetMapping("/mulJ")
+    public BinResult mulJ(@RequestParam(name="op1", required=true) String op1,
+                         @RequestParam(name="op2", required=true) String op2) {
+        Binary b1 = new Binary(op1);
+        Binary b2 = new Binary(op2);
+        Binary r = Binary.multiply(b1, b2);
+        return new BinResult(b1.getValue(), b2.getValue(), r.getValue(), '*');
+    }
 }
