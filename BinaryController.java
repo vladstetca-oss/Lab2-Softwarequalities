@@ -40,13 +40,13 @@ public class BinaryController {
                 char c = oper.charAt(0);
                 
                 if (c == '+') {
-                    result = Binary.add(binary1, binary2);  
+                    result = Binary.add(binary1, binary2);
                 } else if (c == '*') {
-                    result = Binary.multiply(binary1, binary2); 
+                    result = Binary.multiply(binary1, binary2);
                 } else if (c == '&') {
-                    result = Binary.and(binary1, binary2); 
+                    result = Binary.and(binary1, binary2);
                 } else if (c == '|') {
-                    result = Binary.or(binary1, binary2); 
+                    result = Binary.or(binary1, binary2);
                 } else {
                     return "error";
                 }
